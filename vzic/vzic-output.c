@@ -1168,6 +1168,7 @@ output_zone_components                  (FILE           *fp,
     vzictime->until = NULL;
   }
 
+#if 0
   if (zone_desc) {
     /* Add COMMENT */
     fprintf (fp, "COMMENT:[%.2s] ", zone_desc->country_code);
@@ -1188,12 +1189,11 @@ output_zone_components                  (FILE           *fp,
     }
     fprintf (fp, "\r\n");
 
-#if 0
     /* Add GEO */
     fprintf (fp, "GEO:%+.6f,%+.6f\r\n",
              dms_to_dd(zone_desc->latitude), dms_to_dd(zone_desc->longitude));
-#endif
   }
+#endif
 
   /* Use current time as LAST-MODIFIED */
   fprintf (fp, "LAST-MODIFIED:%04i%02i%02iT%02i%02i%02iZ\r\n",
