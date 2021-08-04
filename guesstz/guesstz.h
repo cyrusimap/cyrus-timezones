@@ -81,7 +81,7 @@ extern const char *guesstz_error(guesstz_t *gtz);
 
 /** @brief Guess the IANA timezone name of a VTIMEZONE
  *
- *  Two timezones are considered equal in their observance
+ *  Two timezones are considered equal if their observance
  *  onsets and UTC offsets match within the given time range.
  *  Observances are expanded until the minimum of the given
  *  time range end and the end of the database time range.
