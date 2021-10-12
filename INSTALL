@@ -8,5 +8,4 @@ standard location:
     $ ./configure
     $ make install
 
-See Makefile.am and vzic/Makefile.am to override
-default settings.
+See Makefile.am to override default settings.

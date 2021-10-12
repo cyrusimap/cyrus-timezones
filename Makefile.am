@@ -1,6 +1,4 @@
-# Makefile for the Cyrus timezones build of vzic. See vzic/Makefile.vzic for the
-# original Makefile of the vzic command.
-SUBDIRS = vzic guesstz
+SUBDIRS = guesstz
 
 EXTRA_DIST = tzdata
 
@@ -11,9 +9,9 @@ DISTCLEANFILES = cyrus-timezones.pc guesstz.pc
 
 all-local: zoneinfo
 
-zoneinfo: vzic/cyr_vzic guesstz/cyr_guesstz
+zoneinfo: guesstz/cyr_guesstz
 	@echo "Generating zoneinfo files"
-	./vzic/cyr_vzic --pure --olson-dir ${srcdir}/tzdata --output-dir zoneinfo
+	${PREFIX}/bin/vzic --pure --olson-dir ${srcdir}/tzdata --output-dir zoneinfo
 	$(INSTALL_DATA) ${srcdir}/tzdata/version zoneinfo
 	@echo "Generating guesstz file"
 	./guesstz/cyr_guesstz -z zoneinfo zoneinfo/guesstz.db

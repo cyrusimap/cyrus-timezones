@@ -2,7 +2,6 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([cyrus-timezones],[1.0])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE
-AC_CONFIG_HEADERS([vzic/config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 dnl Checks for programs.
@@ -47,5 +46,5 @@ PKG_CHECK_VAR([JANSSON_LIBDIR], [jansson], [libdir])
 
 AC_CONFIG_FILES([cyrus-timezones.pc:cyrus-timezones.pc.in])
 AC_CONFIG_FILES([guesstz.pc:guesstz.pc.in])
-AC_CONFIG_FILES([Makefile vzic/Makefile guesstz/Makefile])
+AC_CONFIG_FILES([Makefile guesstz/Makefile])
 AC_OUTPUT
