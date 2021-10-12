@@ -1175,7 +1175,7 @@ static int create_from_zonedir(const char *zoneinfo_dir,
     /* Process VTIMEZONEs */
     FTSENT *fe;
     while ((fe = fts_read(fts))) {
-        if (fe->fts_info != FTS_F) {
+        if (fe->fts_info != FTS_F && fe->fts_info != FTS_SL) {
             continue;
         }
         FILE *vtzfp = fopen(fe->fts_accpath, "r");
