@@ -20,5 +20,5 @@ END:VTIMEZONE
 END:VCALENDAR"
 trstart="20201227T140000Z"
 trend="20201227T150000Z"
-want="US/Eastern"
+want="America/Toronto"
 . "$srcdir/tests/test.sh"

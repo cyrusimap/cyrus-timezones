@@ -11,7 +11,7 @@ all-local: zoneinfo
 
 zoneinfo: guesstz/cyr_guesstz
 	@echo "Generating zoneinfo files"
-	${PREFIX}/bin/vzic --pure --olson-dir ${srcdir}/tzdata --output-dir zoneinfo
+	TZID_PREFIX="" ${PREFIX}/bin/vzic --pure --olson-dir ${srcdir}/tzdata --output-dir zoneinfo
 	$(INSTALL_DATA) ${srcdir}/tzdata/version zoneinfo
 	@echo "Generating guesstz file"
 	./guesstz/cyr_guesstz -z zoneinfo zoneinfo/guesstz.db
