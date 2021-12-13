@@ -181,11 +181,11 @@ struct tzoffset {
  * pattern of shifting daylight savings time one hour from
  * standard time. One for (almost) every offset hour */
 static const char *preferred_tzids[] = {
-    "US/Aleutian",
-    "US/Alaska",
-    "US/Pacific",
-    "US/Mountain",
-    "US/Eastern",
+    "America/Adak",
+    "America/Anchorage",
+    "America/Los_Angeles",
+    "America/Denver",
+    "America/New_York",
     "America/Puerto_Rico",
     "America/Nuuk",
     "Atlantic/Azores",

@@ -44,4 +44,4 @@ libguesstz_la_CFLAGS = \
 include_HEADERS = \
 	guesstz.h
 
-TESTS = tests/toronto.sh tests/gmt.sh tests/berlin.sh
+TESTS = tests/newyork.sh tests/gmt.sh tests/berlin.sh
