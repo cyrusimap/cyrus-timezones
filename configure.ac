@@ -3,6 +3,7 @@ AC_INIT([cyrus-timezones],[1.0])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_HEADERS(config.h)
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -29,7 +30,12 @@ dnl AC_FUNC_VPRINTF
 dnl AC_CHECK_FUNCS([gettimeofday memset strchr strdup strpbrk])
 
 dnl Checks for required libraries
-PKG_CHECK_MODULES([ICAL], [libical])
+PKG_CHECK_MODULES([ICAL], [libical], [
+                  dnl icalrecurrencetype_new will be new in libical 4.0
+                  AC_CHECK_LIB(ical, icalrecurrencetype_new,
+                               AC_DEFINE(HAVE_RECUR_BY_REF,[],
+                                         [Do we have support for icalrecurrencetype by reference?]))
+])
 AC_SUBST([ICAL_LIBS])
 AC_SUBST([ICAL_CFLAGS])
 PKG_CHECK_VAR([ICAL_LIBDIR], [libical], [libdir])
