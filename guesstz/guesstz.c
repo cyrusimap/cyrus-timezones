@@ -391,17 +391,17 @@ static void expand_icalobservances(icalcomponent *vtz,
         }
 
         if (rrule_prop) {
-            struct icalrecurrencetype rrule =
+            struct icalrecurrencetype *rrule =
                 icalproperty_get_rrule(rrule_prop);
             icalrecur_iterator *ritr = NULL;
-            unsigned eternal = icaltime_is_null_time(rrule.until);
+            unsigned eternal = icaltime_is_null_time(rrule->until);
             unsigned trunc_until = 0;
 
             /* Check RRULE duration */
-            if (!eternal && icaltime_compare(rrule.until, start) < 0) {
+            if (!eternal && icaltime_compare(rrule->until, start) < 0) {
                 /* RRULE ends prior to our window open -
                    check UNTIL vs tombstone */
-                obs.onset = rrule.until;
+                obs.onset = rrule->until;
                 if (need_tomb) check_tombstone(&tombstone, &obs);
 
                 /* Remove RRULE */
@@ -411,15 +411,15 @@ static void expand_icalobservances(icalcomponent *vtz,
             else {
                 /* RRULE ends on/after our window open */
                 if (!icaltime_is_null_time(end) &&
-                    (eternal || icaltime_compare(rrule.until, end) >= 0)) {
+                    (eternal || icaltime_compare(rrule->until, end) >= 0)) {
                     /* RRULE ends after our window close - need to adjust it */
                     trunc_until = 1;
                 }
 
                 if (!eternal) {
                     /* Adjust UNTIL to local time (for iterator) */
-                    icaltime_adjust(&rrule.until, 0, 0, 0, obs.offset_from);
-                    icaltime_set_utc(&rrule.until, 0);
+                    icaltime_adjust(&rrule->until, 0, 0, 0, obs.offset_from);
+                    icaltime_set_utc(&rrule->until, 0);
                 }
 
                 if (trunc_dtstart) {
@@ -470,7 +470,7 @@ static void expand_icalobservances(icalcomponent *vtz,
                         }
                         else if (!eternal) {
                             /* Set UNTIL to previous onset */
-                            rrule.until = prev_onset;
+                            rrule->until = prev_onset;
                             icalproperty_set_rrule(rrule_prop, rrule);
                         }
 
@@ -496,7 +496,7 @@ static void expand_icalobservances(icalcomponent *vtz,
                             trunc_dtstart = 0;
 
                             /* Check if new DSTART is within 1yr of UNTIL */
-                            ydiff = rrule.until.year - recur.year;
+                            ydiff = rrule->until.year - recur.year;
                             if (!trunc_until && ydiff <= 1) {
                                 /* Remove RRULE */
                                 icalcomponent_remove_property(comp, rrule_prop);
@@ -505,7 +505,7 @@ static void expand_icalobservances(icalcomponent *vtz,
                                 if (ydiff) {
                                     /* Add UNTIL as RDATE */
                                     struct icaldatetimeperiodtype rdate = {
-                                        rrule.until,
+                                        rrule->until,
                                         icalperiodtype_null_period()
                                     };
                                     prop = icalproperty_new_rdate(rdate);
