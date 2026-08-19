@@ -1,3 +1,8 @@
+This library is no longer maintained. It got merged in the cyrus-imapd
+repository at commit bdede2a41bd052cee4e559b5b7de6703c04e7b4b.
+
+---
+
 cyrus-timezones provides timezone information for the Cyrus IMAP Server
 (https://github.com/cyrusimap/cyrus-imapd).
 
